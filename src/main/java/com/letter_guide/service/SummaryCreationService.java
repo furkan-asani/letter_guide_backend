@@ -3,7 +3,6 @@ package com.letter_guide.service;
 import java.util.ArrayList;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
@@ -18,8 +17,6 @@ public class SummaryCreationService {
 
    public static final String SYSTEM = "system";
    public static final String GPT_3_5_TURBO = "gpt-3.5-turbo";
-   @Value("${openai.api.key}")
-   private String apiKey;
 
    @Autowired
    private  OpenAIApiClient _openAIApiClient;
