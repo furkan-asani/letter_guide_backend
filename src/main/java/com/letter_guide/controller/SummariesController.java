@@ -9,19 +9,19 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.letter_guide.models.SummarizedDocument;
-import com.letter_guide.service.SummariesService;
+import com.letter_guide.service.SummariesFetchService;
 
 
 @RestController
 @RequestMapping("/api")
 public class SummariesController {
 
-   private final SummariesService _summariesService;
+   private final SummariesFetchService _summariesFetchService;
 
-   public SummariesController( SummariesService _summariesService ) {this._summariesService = _summariesService;}
+   public SummariesController( SummariesFetchService _summariesFetchService ) {this._summariesFetchService = _summariesFetchService;}
    @GetMapping("/{userId}")
    public ResponseEntity<List<SummarizedDocument>> getAllSummariesByUserId(@PathVariable String userId) {
-      List<SummarizedDocument> allDocumentsByUserId = _summariesService.getAllDocumentsByUserId(userId);
+      List<SummarizedDocument> allDocumentsByUserId = _summariesFetchService.getAllDocumentsByUserId(userId);
 
       if ( allDocumentsByUserId == null || allDocumentsByUserId.isEmpty() ) {
          return ResponseEntity.notFound().build();

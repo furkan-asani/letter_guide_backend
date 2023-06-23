@@ -10,12 +10,12 @@ import com.letter_guide.repository.SummariesRepository;
 
 
 @Service
-public class SummariesService{
+public class SummariesFetchService {
 
    private final SummariesRepository _summariesRepository;
 
    @Autowired
-   public SummariesService(SummariesRepository summariesRepository) {
+   public SummariesFetchService(SummariesRepository summariesRepository) {
       this._summariesRepository= summariesRepository;
    }
 
