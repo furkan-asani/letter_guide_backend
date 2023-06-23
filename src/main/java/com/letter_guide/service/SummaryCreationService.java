@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.letter_guide.clients.OpenAIApiClient;
+import com.letter_guide.models.SummarizedDocument;
 import com.letter_guide.models.api.OpenAIApiRequest;
 
 
@@ -18,19 +19,22 @@ public class SummaryCreationService {
    public static final String SYSTEM = "system";
    public static final String GPT_3_5_TURBO = "gpt-3.5-turbo";
    @Value("${openai.api.key}")
-   private String apiKey; // Your OpenAI API key
+   private String apiKey;
 
    @Autowired
    private  OpenAIApiClient _openAIApiClient;
    @Autowired
    private PromptCreationService _promptCreationService;
+   @Autowired
+   private OpenAIResponseParserService _openAIResponseParserService;
 
-   public String sendPrompt(String extractedText) {
+   public SummarizedDocument getSummarizedDocument(String extractedText) {
 
       String apiRequestBody = createOpenAIApiRequest(extractedText);
       String responseBody = _openAIApiClient.sendPrompt(apiRequestBody);
+      SummarizedDocument summarizedDocument = _openAIResponseParserService.parseResponse(responseBody);
 
-      return null;
+      return summarizedDocument;
    }
 
    protected String createOpenAIApiRequest( String extractedText ) {
