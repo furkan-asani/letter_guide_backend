@@ -26,7 +26,6 @@ class OpenAIApiClientTest {
 
    @BeforeEach
    void setUp() {
-
       MockitoAnnotations.openMocks(this);
    }
 
