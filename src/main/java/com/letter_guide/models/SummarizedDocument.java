@@ -2,62 +2,78 @@ package com.letter_guide.models;
 
 import java.util.List;
 
+import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.Document;
+import org.springframework.data.mongodb.core.mapping.Field;
 
+@Document(collection = "summaries")
 public class SummarizedDocument {
 
-   private       String       _summary;
-   private       String       _category;
-   private List<String> _tasks;
-   private List<String> _nextSteps;
-   private List<String> _deadlines;
+   @Id
+private String          id;
+   @Field("userId")
+   private String         userId;
+   private       String summary;
+   private       String category;
+   private List<String> tasks;
+   private List<String> nextSteps;
+   private List<String> deadlines;
+   private String priority;
+
 
    public String getSummary() {
-      return _summary;
+      return summary;
+   }
+
+   public String getUserId() {
+      return userId;
    }
 
    public void setSummary( String summary ) {
-      _summary = summary;
+      this.summary = summary;
    }
 
    public String getCategory() {
-      return _category;
+      return category;
    }
 
    public void setCategory( String category ) {
-      _category = category;
+      this.category = category;
    }
 
    public List<String> getTasks() {
-      return _tasks;
+      return tasks;
    }
 
    public void setTasks( List<String> tasks ) {
-      _tasks = tasks;
+      this.tasks = tasks;
    }
 
    public List<String> getNextSteps() {
-      return _nextSteps;
+      return nextSteps;
    }
 
    public void setNextSteps( List<String> nextSteps ) {
-      _nextSteps = nextSteps;
+      this.nextSteps = nextSteps;
    }
 
    public List<String> getDeadlines() {
-      return _deadlines;
+      return deadlines;
    }
 
    public void setDeadlines( List<String> deadlines ) {
-      _deadlines = deadlines;
+      this.deadlines = deadlines;
    }
 
    public String getPriority() {
-      return _priority;
+      return priority;
    }
 
    public void setPriority( String priority ) {
-      _priority = priority;
+      this.priority = priority;
    }
 
-   private String _priority;
+   public void setUserId( String userId ) {
+      this.userId = userId;
+   }
 }
