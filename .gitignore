@@ -31,5 +31,5 @@ build/
 
 ### VS Code ###
 .vscode/
-/src/main/java/com/letter_guide/config/google-services.json
-/src/main/java/com/letter_guide/config/letterguide-db6d5-firebase-adminsdk-lesit-48607cede9.json
+
+/src/main/resources/secrets.properties
