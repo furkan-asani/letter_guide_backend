@@ -29,9 +29,8 @@ public class SummaryCreationService {
 
       String apiRequestBody = createOpenAIApiRequest(extractedText);
       String responseBody = _openAIApiClient.sendPrompt(apiRequestBody);
-      SummarizedDocument summarizedDocument = _openAIResponseParserService.parseResponse(responseBody);
 
-      return summarizedDocument;
+      return _openAIResponseParserService.parseResponse(responseBody);
    }
 
    protected String createOpenAIApiRequest( String extractedText ) {
