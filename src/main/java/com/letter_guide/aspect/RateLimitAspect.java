@@ -16,11 +16,15 @@ import jakarta.servlet.http.HttpServletRequest;
 @Component
 public class RateLimitAspect {
 
-   @Autowired
-   private HttpServletRequest request;
+   private final HttpServletRequest request;
+
+   private final RedisTemplate<String, String> redisTemplate;
 
    @Autowired
-   private RedisTemplate<String, String> redisTemplate;
+   public RateLimitAspect( HttpServletRequest request, RedisTemplate<String, String> redisTemplate ) {
+      this.request = request;
+      this.redisTemplate = redisTemplate;
+   }
 
    @Before("@annotation(com.letter_guide.aspect.RateLimit)")
    public void rateLimit() throws RateLimitException {
