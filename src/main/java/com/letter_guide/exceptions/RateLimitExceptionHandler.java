@@ -12,7 +12,7 @@ import com.letter_guide.aspect.RateLimitAspect.RateLimitException;
 public class RateLimitExceptionHandler {
 
    @ExceptionHandler(value = RateLimitException.class)
-   public ResponseEntity<Object> handleRateLimitException(RateLimitException ex) {
+   public ResponseEntity<Object> handleRateLimitException(RateLimitException ignoredEx ) {
       return new ResponseEntity<>("You have exceeded the rate limit", HttpStatus.TOO_MANY_REQUESTS);
    }
 }
