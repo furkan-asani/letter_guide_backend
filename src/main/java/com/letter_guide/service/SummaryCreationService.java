@@ -29,7 +29,6 @@ public class SummaryCreationService {
    }
 
    public SummarizedDocument getSummarizedDocument(String extractedText) {
-
       String apiRequestBody = createOpenAIApiRequestBody(extractedText);
       String responseBody = _openAIApiClient.sendPrompt(apiRequestBody);
 
@@ -41,7 +40,6 @@ public class SummaryCreationService {
 
       ArrayList<OpenAIApiRequest.Message> messages = new ArrayList<>();
       messages.add(new OpenAIApiRequest.Message(SYSTEM, prompt));
-
 
       OpenAIApiRequest openAIApiRequest = new OpenAIApiRequest(GPT_3_5_TURBO, messages, 0.2);
       ObjectMapper objectMapper = new ObjectMapper();
