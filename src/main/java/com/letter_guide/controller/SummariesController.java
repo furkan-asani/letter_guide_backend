@@ -2,6 +2,7 @@ package com.letter_guide.controller;
 
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -23,7 +24,9 @@ public class SummariesController {
    private final SummaryFetchService    _summaryFetchService;
    private final SummaryCreationService _summaryCreationService;
 
-   public SummariesController( SummaryFetchService _summaryFetchService, SummaryCreationService _summaryCreationService ) {this._summaryFetchService = _summaryFetchService;
+   @Autowired
+   public SummariesController( SummaryFetchService _summaryFetchService, SummaryCreationService _summaryCreationService ) {
+      this._summaryFetchService = _summaryFetchService;
       this._summaryCreationService = _summaryCreationService;
    }
    @GetMapping("/{userId}")
