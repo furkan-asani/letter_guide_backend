@@ -23,7 +23,7 @@ public class RateLimitAspect {
    private RedisTemplate<String, String> redisTemplate;
 
    @Before("@annotation(com.letter_guide.aspect.RateLimit)")
-   public void rateLimit() {
+   public void rateLimit() throws RateLimitException {
       String ip = request.getRemoteAddr();
       ValueOperations<String, String> ops = redisTemplate.opsForValue();
 
@@ -33,7 +33,14 @@ public class RateLimitAspect {
       }
 
       if (count > 3) {
-         throw new RuntimeException("Too many requests");
+         throw new RateLimitException("Too many requests");
+      }
+   }
+
+   public static class RateLimitException extends Throwable {
+
+      public RateLimitException( String message ) {
+         super(message);
       }
    }
 }
