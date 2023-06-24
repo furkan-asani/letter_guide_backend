@@ -7,6 +7,6 @@ import org.springframework.data.mongodb.repository.MongoRepository;
 import com.letter_guide.models.SummarizedDocument;
 
 
-public interface SummariesRepository extends MongoRepository<SummarizedDocument, String> {
+public interface SummaryRepository extends MongoRepository<SummarizedDocument, String> {
    List<SummarizedDocument> findByUserId(String userId);
 }

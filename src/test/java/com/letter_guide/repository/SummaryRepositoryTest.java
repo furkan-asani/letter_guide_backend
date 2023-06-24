@@ -20,15 +20,15 @@ import com.letter_guide.models.SummarizedDocument;
 @ExtendWith(SpringExtension.class)
 @Import({ TestDatabaseConfig.class}) // Import your MongoDB configuration if needed
 @DirtiesContext(classMode = DirtiesContext.ClassMode.AFTER_EACH_TEST_METHOD)
-public class SummariesRepositoryTest {
+public class SummaryRepositoryTest {
 
    @AfterEach
    void tearDown() {
-      _summariesRepository.deleteAll();
+      _summaryRepository.deleteAll();
    }
 
    @Autowired
-   private SummariesRepository _summariesRepository;
+   private SummaryRepository _summaryRepository;
 
    @Test
    public void testFindByUserId() {
@@ -42,10 +42,10 @@ public class SummariesRepositoryTest {
       summarizedDocument.setUserId("1");
       summarizedDocument.setSummary("Test User");
 
-      _summariesRepository.save(summarizedDocument);
+      _summaryRepository.save(summarizedDocument);
 
       // Act
-      List<SummarizedDocument> foundSummarizedDocument = _summariesRepository.findByUserId("1");
+      List<SummarizedDocument> foundSummarizedDocument = _summaryRepository.findByUserId("1");
 
       // Assert
       assertThat(foundSummarizedDocument.get(foundSummarizedDocument.size()-1)).usingRecursiveComparison().isEqualTo(summarizedDocument);

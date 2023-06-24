@@ -6,21 +6,21 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.letter_guide.models.SummarizedDocument;
-import com.letter_guide.repository.SummariesRepository;
+import com.letter_guide.repository.SummaryRepository;
 
 
 @Service
 public class SummaryFetchService {
 
-   private final SummariesRepository _summariesRepository;
+   private final SummaryRepository _summaryRepository;
 
    @Autowired
-   public SummaryFetchService(SummariesRepository summariesRepository) {
-      this._summariesRepository= summariesRepository;
+   public SummaryFetchService( SummaryRepository summaryRepository ) {
+      this._summaryRepository = summaryRepository;
    }
 
    public List<SummarizedDocument> getAllDocumentsByUserId(String userId) {
-      return _summariesRepository.findByUserId(userId);
+      return _summaryRepository.findByUserId(userId);
 
    }
 }
