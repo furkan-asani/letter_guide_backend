@@ -10,8 +10,9 @@ import org.mockito.MockitoAnnotations;
 
 
 class SummaryCreationServiceTest {
+
    @InjectMocks
-   private final SummaryCreationService _summaryCreationService = new SummaryCreationService();
+   private SummaryCreationService _summaryCreationService;
 
    @Mock
    private PromptCreationService _promptCreationService;
@@ -23,7 +24,7 @@ class SummaryCreationServiceTest {
       Mockito.when(_promptCreationService.createPrompt(Mockito.anyString())).thenCallRealMethod();
 
       //when
-      String apiRequest = _summaryCreationService.createOpenAIApiRequest(
+      String apiRequest = _summaryCreationService.createOpenAIApiRequestBody(
             "You will have to pay your rent in 2 months or we will have to kick you out respectfully");
 
       //then
