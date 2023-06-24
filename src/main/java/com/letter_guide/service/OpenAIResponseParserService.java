@@ -16,7 +16,7 @@ public class OpenAIResponseParserService {
          return mapper.readValue(openAIResponse, SummarizedDocument.class);
       }
       catch ( JsonProcessingException e ) {
-         throw new RuntimeException("The response could not be parsed correctly. OpenAI responded with the follwing: openAIResponse", e);
+         throw new RuntimeException("The response could not be parsed correctly. OpenAI responded with the following: openAIResponse", e);
       }
    }
 }
