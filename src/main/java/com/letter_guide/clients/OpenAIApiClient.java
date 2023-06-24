@@ -16,7 +16,6 @@ import org.springframework.stereotype.Component;
 @PropertySource("classpath:secrets.properties")
 @Component
 public class OpenAIApiClient {
-   @Autowired
    private final HttpClient httpClient;
    private static final String OPEN_AI_API = "https://api.openai.com/v1/chat/completions";
    @Value("${openai.api.key}")
