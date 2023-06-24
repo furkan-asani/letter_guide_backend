@@ -23,9 +23,9 @@ class OpenAIResponseParserServiceTest {
       SummarizedDocument summarizedDocument = new SummarizedDocument();
       summarizedDocument.setSummary("This is a summary");
       summarizedDocument.setCategory("IRR");
-      summarizedDocument.setTasks(new ArrayList<String>(List.of("Hello", "Hello")));
-      summarizedDocument.setNextSteps(new ArrayList<String>(List.of("Hullo", "Hullo")));
-      summarizedDocument.setDeadlines(new ArrayList<String>(List.of("Hzllo", "Hzllo")));
+      summarizedDocument.setTasks(new ArrayList<>(List.of("Hello", "Hello")));
+      summarizedDocument.setNextSteps(new ArrayList<>(List.of("Hullo", "Hullo")));
+      summarizedDocument.setDeadlines(new ArrayList<>(List.of("Hzllo", "Hzllo")));
       summarizedDocument.setPriority("High");
       summarizedDocument.setUserId("1");
       String openAIResponse;
