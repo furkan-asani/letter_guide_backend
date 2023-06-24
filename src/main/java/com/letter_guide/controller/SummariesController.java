@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.letter_guide.models.SummarizedDocument;
 import com.letter_guide.models.api.CreateSummarizedDocumentRequest;
-import com.letter_guide.service.SummariesFetchService;
+import com.letter_guide.service.SummaryFetchService;
 import com.letter_guide.service.SummaryCreationService;
 
 
@@ -20,15 +20,15 @@ import com.letter_guide.service.SummaryCreationService;
 @RequestMapping("/api")
 public class SummariesController {
 
-   private final SummariesFetchService  _summariesFetchService;
+   private final SummaryFetchService    _summaryFetchService;
    private final SummaryCreationService _summaryCreationService;
 
-   public SummariesController( SummariesFetchService _summariesFetchService, SummaryCreationService _summaryCreationService ) {this._summariesFetchService = _summariesFetchService;
+   public SummariesController( SummaryFetchService _summaryFetchService, SummaryCreationService _summaryCreationService ) {this._summaryFetchService = _summaryFetchService;
       this._summaryCreationService = _summaryCreationService;
    }
    @GetMapping("/{userId}")
    public ResponseEntity<List<SummarizedDocument>> getAllSummariesByUserId(@PathVariable String userId) {
-      List<SummarizedDocument> allDocumentsByUserId = _summariesFetchService.getAllDocumentsByUserId(userId);
+      List<SummarizedDocument> allDocumentsByUserId = _summaryFetchService.getAllDocumentsByUserId(userId);
 
       if ( allDocumentsByUserId == null || allDocumentsByUserId.isEmpty() ) {
          return ResponseEntity.notFound().build();
