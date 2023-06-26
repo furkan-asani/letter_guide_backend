@@ -14,7 +14,7 @@ import com.letter_guide.models.api.OpenAIApiRequest;
 @Service
 public class SummaryCreationService {
 
-   public static final String SYSTEM = "system";
+   public static final String SYSTEM        = "system";
    public static final String GPT_3_5_TURBO = "gpt-3.5-turbo";
 
    private final OpenAIApiClient             _openAIApiClient;
@@ -28,7 +28,7 @@ public class SummaryCreationService {
       this._openAIResponseParserService = _openAIResponseParserService;
    }
 
-   public SummarizedDocument getSummarizedDocument(String extractedText) {
+   public SummarizedDocument getSummarizedDocument( String extractedText ) {
       String apiRequestBody = createOpenAIApiRequestBody(extractedText);
       String responseBody = _openAIApiClient.sendPrompt(apiRequestBody);
 
@@ -47,7 +47,7 @@ public class SummaryCreationService {
          return objectMapper.writeValueAsString(openAIApiRequest);
       }
       catch ( JsonProcessingException e ) {
-         throw new RuntimeException("Error while writing the request object into a json body",e);
+         throw new RuntimeException("Error while writing the request object into a json body", e);
       }
    }
 }

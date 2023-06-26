@@ -13,28 +13,28 @@ public class Choice {
    @JsonProperty("finish_reason")
    private String finishReason;
 
-   public int getIndex() {
-      return index;
+   public String getFinishReason() {
+      return finishReason;
    }
 
-   public void setIndex( int index ) {
-      this.index = index;
+   public int getIndex() {
+      return index;
    }
 
    public Message getMessage() {
       return message;
    }
 
-   public void setMessage( Message message ) {
-      this.message = message;
-   }
-
-   public String getFinishReason() {
-      return finishReason;
-   }
-
    public void setFinishReason( String finishReason ) {
       this.finishReason = finishReason;
+   }
+
+   public void setIndex( int index ) {
+      this.index = index;
+   }
+
+   public void setMessage( Message message ) {
+      this.message = message;
    }
    // Getters and setters
 }

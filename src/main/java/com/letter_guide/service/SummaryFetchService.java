@@ -19,7 +19,7 @@ public class SummaryFetchService {
       this._summaryRepository = summaryRepository;
    }
 
-   public List<SummarizedDocument> getAllDocumentsByUserId(String userId) {
+   public List<SummarizedDocument> getAllDocumentsByUserId( String userId ) {
       return _summaryRepository.findByUserId(userId);
 
    }
