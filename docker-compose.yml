@@ -1,0 +1,34 @@
+version: '3'
+services:
+  redis_compose:
+    image: redis
+    container_name: redis_compose
+    ports:
+      - "6379:6379"
+    restart: "no"
+
+  my-mongodb-test_compose:
+    image: mongo
+    container_name: my-mongodb-test_compose
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: admin
+      MONGO_INITDB_ROOT_PASSWORD: password
+      MONGO_INITDB_DATABASE: letter_guide
+    ports:
+      - "27018:27017"
+    restart: "no"
+
+  my-mongodb_compose:
+    image: mongo
+    container_name: my-mongodb_compose
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: admin
+      MONGO_INITDB_ROOT_PASSWORD: password
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongodb_data:/data/db
+    restart: "no"
+
+volumes:
+  mongodb_data:
