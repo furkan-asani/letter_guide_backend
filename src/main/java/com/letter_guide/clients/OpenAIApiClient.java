@@ -9,22 +9,28 @@ import java.net.http.HttpResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.context.annotation.Profile;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.stereotype.Component;
+
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.letter_guide.service.debug.ApiResponseService;
 
 
 @PropertySource("classpath:secrets.properties")
 @Component
 public class OpenAIApiClient {
-   private final HttpClient httpClient;
-   private static final String OPEN_AI_API = "https://api.openai.com/v1/chat/completions";
+
+   private static final String             OPEN_AI_API = "https://api.openai.com/v1/chat/completions";
+   private final        HttpClient         httpClient;
+   private final        ApiResponseService _apiResponseService;
    @Value("${openai.api.key}")
-   private  String API_KEY;
+   private              String             API_KEY;
 
    @Autowired
-   public OpenAIApiClient( HttpClient httpClient ) {
+   public OpenAIApiClient( HttpClient httpClient, ApiResponseService apiResponseService ) {
       this.httpClient = httpClient;
-
+      _apiResponseService = apiResponseService;
    }
 
    public String sendPrompt( String body ) {
@@ -33,8 +39,10 @@ public class OpenAIApiClient {
       HttpResponse<String> response;
       try {
          response = httpClient.send(request, HttpResponse.BodyHandlers.ofString());
+         saveResponseToDb(response);
+
          if ( response.statusCode() >= 400 ) {
-            throw new RuntimeException("The OpenAI api must be unavailable due to a reason. Response data: "+ response.body());
+            throw new RuntimeException("The OpenAI api must be unavailable due to a reason. Response data: " + response.body());
          }
 
          return response.body();
@@ -58,6 +66,22 @@ public class OpenAIApiClient {
          throw new RuntimeException(e);
       }
       return request;
+   }
+
+   /**
+    * ONLY for non prod environments. Used for debugging purposes
+    * Saves the HTTP response to the database.
+    * @param response the HTTP response to save
+    */
+   @Profile("!prod")
+   private void saveResponseToDb( HttpResponse<String> response ) {
+      _apiResponseService.saveRawResponse("Status code: " + response.statusCode() + "\n body: " + response.body());
+
+      try {
+         _apiResponseService.saveParsedResponse(response.body());
+      }
+      catch ( JsonProcessingException ignored ) {
+      }
    }
 
 }
