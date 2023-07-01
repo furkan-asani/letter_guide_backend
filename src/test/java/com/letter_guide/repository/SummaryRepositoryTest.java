@@ -11,21 +11,19 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.data.mongo.DataMongoTest;
 import org.springframework.context.annotation.Import;
 import org.springframework.test.annotation.DirtiesContext;
+import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
 import com.letter_guide.config.TestDatabaseConfig;
 import com.letter_guide.models.SummarizedDocument;
 
+
 @DataMongoTest
 @ExtendWith(SpringExtension.class)
-@Import({ TestDatabaseConfig.class}) // Import your MongoDB configuration if needed
+@Import({ TestDatabaseConfig.class })
 @DirtiesContext(classMode = DirtiesContext.ClassMode.AFTER_EACH_TEST_METHOD)
+@ActiveProfiles("test")
 public class SummaryRepositoryTest {
-
-   @AfterEach
-   void tearDown() {
-      _summaryRepository.deleteAll();
-   }
 
    @Autowired
    private SummaryRepository _summaryRepository;
@@ -48,6 +46,11 @@ public class SummaryRepositoryTest {
       List<SummarizedDocument> foundSummarizedDocument = _summaryRepository.findByUserId("1");
 
       // Assert
-      assertThat(foundSummarizedDocument.get(foundSummarizedDocument.size()-1)).usingRecursiveComparison().isEqualTo(summarizedDocument);
+      assertThat(foundSummarizedDocument.get(foundSummarizedDocument.size() - 1)).usingRecursiveComparison().isEqualTo(summarizedDocument);
+   }
+
+   @AfterEach
+   void tearDown() {
+      _summaryRepository.deleteAll();
    }
 }
