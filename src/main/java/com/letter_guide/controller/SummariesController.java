@@ -13,8 +13,8 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.letter_guide.models.SummarizedDocument;
 import com.letter_guide.models.api.CreateSummarizedDocumentRequest;
-import com.letter_guide.service.SummaryFetchService;
 import com.letter_guide.service.SummaryCreationService;
+import com.letter_guide.service.SummaryFetchService;
 
 
 @RestController
@@ -29,8 +29,16 @@ public class SummariesController {
       this._summaryFetchService = _summaryFetchService;
       this._summaryCreationService = _summaryCreationService;
    }
+
+   @PostMapping("/createSummary")
+   public ResponseEntity<SummarizedDocument> createSummarizedDocument( @RequestBody CreateSummarizedDocumentRequest request ) {
+      SummarizedDocument summarizedDocument = _summaryCreationService.getSummarizedDocument(request.getExtractedText());
+
+      return ResponseEntity.ok(summarizedDocument);
+   }
+
    @GetMapping("/{userId}")
-   public ResponseEntity<List<SummarizedDocument>> getAllSummariesByUserId(@PathVariable String userId) {
+   public ResponseEntity<List<SummarizedDocument>> getAllSummariesByUserId( @PathVariable String userId ) {
       List<SummarizedDocument> allDocumentsByUserId = _summaryFetchService.getAllDocumentsByUserId(userId);
 
       if ( allDocumentsByUserId == null || allDocumentsByUserId.isEmpty() ) {
@@ -38,12 +46,5 @@ public class SummariesController {
       }
 
       return ResponseEntity.ok(allDocumentsByUserId);
-   }
-
-   @PostMapping("/createSummary")
-   public ResponseEntity<SummarizedDocument> createSummarizedDocument(@RequestBody CreateSummarizedDocumentRequest request) {
-      SummarizedDocument summarizedDocument = _summaryCreationService.getSummarizedDocument(request.getExtractedText());
-
-      return ResponseEntity.ok(summarizedDocument);
    }
 }
