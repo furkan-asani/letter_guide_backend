@@ -8,17 +8,22 @@ public class PromptCreationService {
 
    public String createPrompt( String extractedText ) {
       String basicPrompt = """
-            I want you to act as an expert translator and summarizer. I will provide you with extracted text from a german letter containing hard to understand 'government talk' and you will categorize it, summarize it, extract possible tasks or next steps if there are any, extract possible deadlines if there are any and you will decide on the priority and importance of this letter. You will provide this response in a json format which will look like this:
+            "I want you to act as an expert translator and summarizer. Your task is to process a German letter written in complex 'government talk'. You will translate it, categorize it, summarize it, extract any tasks or next steps, identify any deadlines, and determine the priority of the letter.
+            Please provide your response in the following JSON format:
+
             {
-              category,
-              summary,
-              tasks,
-              nextSteps,
-              deadlines,
-              priority
+              "category": "",
+              "summary": "",
+              "tasks": [],
+              "nextSteps": [],
+              "deadlines": "",
+              "priority": ""
             }
-            The priority can be either low, medium or high. Please provide the date in the following format: 'dd-MM-YYY'. Tasks and next steps should be arrays with the respective tasks in the correct order. Summary and category can be simple strings.
-            The text you should process: \n
+            The priority should be either 'low', 'medium', or 'high'. Dates should be formatted as 'dd-MM-YYYY'. tasks and nextSteps should be arrays with the tasks in the correct order. summary and category should be simple strings.
+
+            Please provide your response in German.
+
+            Here is the text you should process: \n
             """;
 
       return basicPrompt + extractedText;
